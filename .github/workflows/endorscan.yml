@@ -2,14 +2,12 @@ name: Endor Labs Dependency and Secrets Scan
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 jobs:
-  scan-main:
+  scan-main-cold-cache:
     permissions:
       contents: read
-    name: endorctl-scan
+    name: cold-cache-scan
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
@@ -31,3 +29,33 @@ jobs:
          chmod +x ./endorctl
          ./endorctl --version
          ./endorctl scan --dependencies --quick-scan --disable-private-package-analysis --use-local-repo-cache --languages java 
+  scan-main-WARM-cache:
+    permissions:
+      contents: read
+    name: WARM-cache-scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'microsoft'
+        java-version: '17'
+    - name: Build with maven
+      run: mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
+    - name: Warm the cache
+      run: |
+        mvn help:effective-pom -N -s devops-managed-settings/settings.xml -q
+        mvn dependency:tree    -N -s devops-managed-settings/settings.xml -q
+    - name: Install endorctl and scan
+      env:
+          ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
+          ENDOR_API_CREDENTIALS_SECRET: ${{ secrets.ENDOR_API_CREDENTIALS_SECRET }}
+          ENDOR_NAMESPACE: endor-solutions-tgood.test
+      run: |
+         curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o ./endorctl
+         chmod +x ./endorctl
+         ./endorctl --version
+         ./endorctl scan --dependencies --quick-scan --disable-private-package-analysis --use-local-repo-cache --languages java 
+    
