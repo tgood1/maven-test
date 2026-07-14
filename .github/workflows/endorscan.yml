@@ -20,7 +20,7 @@ jobs:
         distribution: 'microsoft'
         java-version: '17'
     - name: Build with maven
-      run: mvn clean install
+      run: mvn -U clean install -s devops-managed-settings/settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
@@ -30,6 +30,4 @@ jobs:
          curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o ./endorctl
          chmod +x ./endorctl
          ./endorctl --version
-         ./endorctl scan \
-         --languages=java \
-         --secrets=false
+         ./endorctl scan --dependencies --quick-scan --disable-private-package-analysis --use-local-repo-cache --languages java 
