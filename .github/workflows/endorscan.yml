@@ -21,16 +21,14 @@ jobs:
         java-version: '17'
     - name: Build with maven
       run: mvn clean install
-    - name: Install endorctl
-      run: curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o "$HOME/endorctl"
-          chmod +x "$HOME/endorctl"
-          "$HOME/endorctl" --version
-    - name: Scan with endorctl
+    - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
           ENDOR_API_CREDENTIALS_SECRET: ${{ secrets.ENDOR_API_CREDENTIALS_SECRET }}
           ENDOR_NAMESPACE: endor-solutions-tgood.test
-      run: |
-          "$HOME/endorctl" scan \
-            --languages=java \
-            --secrets=false
+      run: curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o ./endorctl
+         chmod +x ./endorctl
+         ./endorctl --version
+         ./endorctl scan \
+         --languages=java \
+         --secrets=false
