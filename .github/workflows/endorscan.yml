@@ -46,8 +46,8 @@ jobs:
       run: mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Warm the cache
       run: |
-        mvn help:effective-pom -N -s devops-managed-settings/settings.xml -q
-        mvn dependency:tree    -N -s devops-managed-settings/settings.xml -q
+        mvn help:effective-pom -N -s settings.xml -q
+        mvn dependency:tree    -N -s settings.xml -q
     - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
