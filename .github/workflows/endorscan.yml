@@ -28,7 +28,7 @@ jobs:
       if: github.event_name == 'pull_request'
       uses: endorlabs/github-action@b8992820cc4d9c9e7ded5022adf6cabe2dc11946 # v1.1.12
       with:
-        namespace: 'endor-solutions-tgood.github'
+        namespace: 'endor-solutions-tgood.test'
         scan_dependencies: true
         scan_secrets: true
         pr: true
@@ -59,7 +59,7 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       uses: endorlabs/github-action@b8992820cc4d9c9e7ded5022adf6cabe2dc11946 #v1.1.12 
       with:
-        namespace: 'endor-solutions-tgood.github'
+        namespace: 'endor-solutions-tgood.test'
         scan_dependencies: true
         scan_secrets: true
         pr: false
