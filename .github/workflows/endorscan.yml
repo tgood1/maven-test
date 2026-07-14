@@ -20,7 +20,7 @@ jobs:
         distribution: 'microsoft'
         java-version: '17'
     - name: Build with maven
-      run: mvn -U clean install -s devops-managed-settings/settings.xml -Dmaven.test.skip=true -DskipTests -q
+      run: mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
