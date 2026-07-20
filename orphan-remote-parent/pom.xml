@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+      Parent lives on Maven Central. The empty relativePath forces repository
+      resolution (no local filesystem lookup).
+
+      This module is intentionally NOT listed in the root pom's <modules>, so
+      "mvn -U clean install" never reads it and never downloads this parent.
+      The parent therefore stays absent from the local repo cache.
+
+      endorctl still discovers this pom on disk and runs, per-pom, an offline
+      "help:effective-pom -f orphan-remote-parent/pom.xml -N" invocation.
+      Because spring-boot-starter-parent was never cached by the build, that
+      offline invocation FAILS with:
+        [FATAL] Non-resolvable parent POM ... Cannot access central in offline mode
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>orphan-remote-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Orphan Module with Remote Parent</name>
+    <description>Standalone module whose parent is fetched from Maven Central</description>
+
+</project>
