@@ -9,7 +9,7 @@
         <groupId>com.example</groupId>
         <artifactId>simple-maven-app</artifactId>
         <version>1.0.0</version>
-        <relativePath></relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>simple-maven-app-child</artifactId>

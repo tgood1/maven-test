@@ -5,6 +5,21 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!--
+      Parent is fetched from Maven Central. The empty relativePath disables the
+      local filesystem lookup, forcing repository resolution.
+        Online  "mvn -U clean install" downloads this parent and succeeds.
+        Offline "help:effective-pom -f pom.xml -N" (offline mode) with a cold
+        cache FAILS: "Non-resolvable parent POM ... Cannot access central in
+        offline mode."
+    -->
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>31</version>
+        <relativePath/>
+    </parent>
+
     <groupId>com.example</groupId>
     <artifactId>simple-maven-app</artifactId>
     <version>1.0.0</version>
