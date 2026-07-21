@@ -53,6 +53,7 @@ jobs:
     - name: mvn -ntp
       run: |
         cd orphan-remote-parent
+        mvn -N help:effective-pom
         mvn -ntp help:effective-pom -f pom.xml \
            -Doutput=/tmp/epom-test.xml -N --offline \
            -Daether.dependencyCollector.impl=bf
