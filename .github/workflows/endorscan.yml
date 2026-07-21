@@ -61,5 +61,5 @@ jobs:
          curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o ./endorctl
          chmod +x ./endorctl
          ./endorctl --version
-         ./endorctl scan --dependencies --quick-scan --disable-private-package-analysis --use-local-repo-cache --languages java 
+         ./endorctl scan --dependencies --quick-scan --disable-private-package-analysis --use-local-repo-cache --languages java --log-level=debug
     
