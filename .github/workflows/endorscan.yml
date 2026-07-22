@@ -19,8 +19,6 @@ jobs:
         java-version: '17'
     - name: Build with maven
       run: mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
-    - name: mvn -ntp
-      run: mvn -ntp help:effective-pom -f pom.xml -Doutput=/tmp/epom-bb92af61-a664-45fb-a0a3-2b851fc4fae3.xml -N --offline -Daether.dependencyCollector.impl=bf
     - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
