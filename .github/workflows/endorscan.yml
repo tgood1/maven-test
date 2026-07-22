@@ -51,12 +51,7 @@ jobs:
         mvn help:effective-pom -N -s settings.xml -q
         mvn dependency:tree    -N -s settings.xml -q
     - name: mvn -ntp
-      run: |
-        cd orphan-remote-parent
-        mvn -N help:effective-pom
-        mvn -ntp help:effective-pom -f pom.xml \
-           -Doutput=/tmp/epom-test.xml -N --offline \
-           -Daether.dependencyCollector.impl=bf
+      run: mvn -ntp help:effective-pom -f pom.xml -Doutput=/tmp/epom-test.xml -N --offline -Daether.dependencyCollector.impl=bf
     - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}

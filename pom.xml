@@ -23,13 +23,6 @@
         <module>common</module>
         <module>service</module>
         <module>app</module>
-        <!--
-          NOTE: "orphan-remote-parent" is deliberately omitted here. It exists
-          on disk (endorctl discovers it) but is never built by
-          "mvn -U clean install", so its Maven-Central parent
-          (spring-boot-starter-parent) is never fetched into the local cache.
-          That is what makes endorctl's offline help:effective-pom fail for it.
-        -->
     </modules>
 
     <dependencyManagement>
