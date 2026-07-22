@@ -1,21 +1,17 @@
 package com.example;
 
-import org.apache.commons.lang3.StringUtils;
-import com.google.gson.Gson;
+import com.example.service.JsonService;
 
 /**
- * A simple application demonstrating use of public Maven packages.
+ * Entry point for the multi-module Maven application.
  */
 public class App {
 
     public static void main(String[] args) {
-        // Use Apache Commons Lang
-        String message = "hello maven";
-        System.out.println("Capitalized: " + StringUtils.capitalize(message));
-
-        // Use Google Gson
-        Gson gson = new Gson();
-        String json = gson.toJson(new String[]{"apache-commons", "gson"});
-        System.out.println("Dependencies as JSON: " + json);
+        JsonService jsonService = new JsonService();
+        String json = jsonService.capitalizeAndEncode(
+                "hello maven",
+                new String[]{"common", "service", "app"});
+        System.out.println(json);
     }
 }

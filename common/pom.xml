@@ -12,16 +12,16 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>app</artifactId>
+    <artifactId>common</artifactId>
     <packaging>jar</packaging>
 
-    <name>App</name>
-    <description>Application module that depends on service</description>
+    <name>Common</name>
+    <description>Shared utilities module</description>
 
     <dependencies>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>service</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

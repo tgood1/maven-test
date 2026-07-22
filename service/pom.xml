@@ -12,16 +12,20 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>app</artifactId>
+    <artifactId>service</artifactId>
     <packaging>jar</packaging>
 
-    <name>App</name>
-    <description>Application module that depends on service</description>
+    <name>Service</name>
+    <description>Service module that depends on common</description>
 
     <dependencies>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
     </dependencies>
 
