@@ -48,6 +48,7 @@ jobs:
     - name: Build with maven
       run: |
         mkdir -p ./local/test/.m2/repository
+        mkdir -p ./fake-local-repo/.m2/repository
         export MAVEN_OPTS="-Dmaven.repo.local=./local/test/.m2/repository"
         mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Warm the cache
