@@ -5,7 +5,6 @@ on:
   workflow_dispatch:
 env:
   MAVEN_OPTS: "-Dmaven.repo.local=./local/test/.m2/repository"
-  ENDOR_MAVEN_ADDITIONAL_PARAMETERS: "-Dmaven.repo.local=./local/test/.m2/repository"
 jobs:
   scan-main-cold-cache:
     permissions:
@@ -62,6 +61,7 @@ jobs:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
           ENDOR_API_CREDENTIALS_SECRET: ${{ secrets.ENDOR_API_CREDENTIALS_SECRET }}
           ENDOR_NAMESPACE: endor-solutions-tgood.test
+          ENDOR_MAVEN_ADDITIONAL_PARAMETERS: "-Dmaven.repo.local=./local/test/.m2/repository"
       run: |
          curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o ./endorctl
          chmod +x ./endorctl
