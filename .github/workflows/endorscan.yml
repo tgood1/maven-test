@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 env:
   MAVEN_OPTS: "-Dmaven.repo.local=./local/test/.m2/repository"
+  ENDOR_MAVEN_ADDITIONAL_PAREMETERS: "-Dmaven.repo.local=./local/test/.m2/repository"
 jobs:
   scan-main-cold-cache:
     permissions:
