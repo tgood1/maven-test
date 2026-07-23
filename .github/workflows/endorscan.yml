@@ -4,7 +4,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 env:
-  MAVEN_OPTS: "-Dmaven.repo.local=./local/test/.m2/repository"
+  MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/local/test/.m2/repository"
 jobs:
   scan-main-cold-cache:
     permissions:
@@ -21,7 +21,7 @@ jobs:
         java-version: '17'
     - name: Build with maven
       run: |
-        mkdir -p ./local/test/.m2/repository
+        mkdir -p ${{ github.workspace }}/local/test/.m2/repository
         mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Install endorctl and scan
       env:
@@ -48,7 +48,7 @@ jobs:
         java-version: '17'
     - name: Build with maven
       run: |
-        mkdir -p ./local/test/.m2/repository
+        mkdir -p ${{ github.workspace }}/local/test/.m2/repository
         mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Warm the cache
       run: |
@@ -61,7 +61,7 @@ jobs:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
           ENDOR_API_CREDENTIALS_SECRET: ${{ secrets.ENDOR_API_CREDENTIALS_SECRET }}
           ENDOR_NAMESPACE: endor-solutions-tgood.test
-          MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/local/test/.m2/repository"
+          # MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/local/test/.m2/repository"
       run: |
          curl -fsSL https://api.endorlabs.com/download/latest/endorctl_linux_amd64 -o ./endorctl
          chmod +x ./endorctl
