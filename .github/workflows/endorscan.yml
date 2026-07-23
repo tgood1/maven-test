@@ -3,6 +3,8 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+env:
+  MAVEN_OPTS: "-Dmaven.repo.local=./local/test/.m2/repository"
 jobs:
   scan-main-cold-cache:
     permissions:
@@ -20,7 +22,6 @@ jobs:
     - name: Build with maven
       run: |
         mkdir -p ./local/test/.m2/repository
-        export MAVEN_OPTS="-Dmaven.repo.local=./local/test/.m2/repository"
         mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Install endorctl and scan
       env:
@@ -48,7 +49,6 @@ jobs:
     - name: Build with maven
       run: |
         mkdir -p ./local/test/.m2/repository
-        export MAVEN_OPTS="-Dmaven.repo.local=./local/test/.m2/repository"
         mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Warm the cache
       run: |
