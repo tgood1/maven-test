@@ -18,7 +18,10 @@ jobs:
         distribution: 'microsoft'
         java-version: '17'
     - name: Build with maven
-      run: mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
+      run: |
+        mkdir -p ./local/test/.m2/repository
+        export MAVEN_OPTS="-Dmaven.repo.local=./local/test/.m2/repository"
+        mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Install endorctl and scan
       env:
           ENDOR_API_CREDENTIALS_KEY: ${{ secrets.ENDOR_API_CREDENTIALS_KEY }}
@@ -43,7 +46,10 @@ jobs:
         distribution: 'microsoft'
         java-version: '17'
     - name: Build with maven
-      run: mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
+      run: |
+        mkdir -p ./local/test/.m2/repository
+        export MAVEN_OPTS="-Dmaven.repo.local=./local/test/.m2/repository"
+        mvn -U clean install -s settings.xml -Dmaven.test.skip=true -DskipTests -q
     - name: Warm the cache
       run: |
         mvn help:effective-pom -N -s settings.xml -q
